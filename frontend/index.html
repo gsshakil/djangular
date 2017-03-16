@@ -42,10 +42,28 @@
         
         <div class="col-md-6">
             <div class="contact-list" ng-show="contacts.length > 0">
-                
-                <ul ng-repeat="contact in contacts">
-                    <li>{{contact.name}} | {{contact.phone}}</li>
-                </ul>
+
+                <table class=".table-striped">
+
+                    <tr>
+                        <td><strong>SL</strong></td>
+                        <td><strong>Name</strong></td>
+                        <td><strong>Contact</strong></td>
+                    </tr>
+
+                    <tr ng-repeat="contact in contacts">
+                        <td>{{$index+1}}</td>
+                        <td>{{contact.name}}
+                            <input type="text" value="{{contact.name}}" ng-show="updateMode">
+                        </td>
+                        <td>{{contact.phone}}
+                            <input type="text" value="{{contact.phone}}" ng-show="updateMode">
+                        </td>
+                        <td><button class="btn btn-default" ng-click="update()">Edit</button></td>
+                        <td><button class="btn btn-danger" ng-click="remove()">X</button></td>
+                    </tr>
+                    
+                </table>
                 
             </div>
         </div>

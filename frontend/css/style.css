@@ -9,3 +9,15 @@
     margin: 10px 0px 60px;
     border: 1px solid GREY;
 }
+
+.contact-list{
+    margin-top: 25px;
+}
+
+.contact-list table tr{
+   border: 1px solid #f4f4f4;
+}
+
+.contact-list table td{
+    padding: 10px 20px;
+}

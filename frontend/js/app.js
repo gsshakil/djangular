@@ -8,6 +8,9 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
 
         $scope.form = {}
 
+        $scope.updateMode = false;
+
+        // get contacts        
         var get = function(){
 
             $http.get(url).then((response)=>{
@@ -22,7 +25,7 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
 
         // add contact 
         $scope.addContact = function(){
-            
+
             var data = $scope.form;
 
             $http.post(url, data).then((response, status, header, config)=>{
@@ -43,6 +46,16 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
 
             });
 
+        };
+
+        //update contacts
+        $scope.update = function(){
+            $scope.updateMode = !$scope.updateMode;
+        };
+
+        // delete contacts
+        $scope.remove = function(){
+            console.log("Deleting...");            
         };
 
         // loading the contact list
