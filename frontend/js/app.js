@@ -47,12 +47,12 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
         };
 
         //update contacts
-        $scope.update = function(){
+        $scope.update = function(id, name, phone){
 
-            var url = "http://127.0.0.1:8000/api/contact/" + $scope.contact.id + "/";
+            var url = "http://127.0.0.1:8000/api/contact/" + id + "/";
             console.log(url);
             
-            var data = $scope.contact;
+            var data = {name,phone};
             
             console.log(data);
             
@@ -72,9 +72,9 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
         };
 
         // delete contacts
-        $scope.remove = function(){
+        $scope.remove = function(id){
 
-            var url = "http://127.0.0.1:8000/api/contact/" + $scope.contact.id + "/"; 
+            var url = "http://127.0.0.1:8000/api/contact/" + id + "/"; 
 
             $http.delete(url).then(()=>{
                 $scope.delete = true;
