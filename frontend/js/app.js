@@ -8,8 +8,6 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
 
         $scope.form = {}
 
-        $scope.updateMode = false;
-
         // get contacts        
         var get = function(){
 
@@ -50,12 +48,47 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
 
         //update contacts
         $scope.update = function(){
-            $scope.updateMode = !$scope.updateMode;
+
+            var url = "http://127.0.0.1:8000/api/contact/" + $scope.contact.id + "/";
+            console.log(url);
+            
+            var data = $scope.contact;
+            
+            console.log(data);
+            
+            $http.put(url, data).then(()=>{
+                $scope.updated = true;
+                $timeout(function(){
+                    $scope.updated = false; 
+                }, 2000);
+                get();
+            }).catch((error)=>{
+                console.log(error);
+                $scope.failed = true;
+                $timeout(function(){
+                    $scope.failed = false; 
+                }, 2000);
+            });
         };
 
         // delete contacts
         $scope.remove = function(){
-            console.log("Deleting...");            
+
+            var url = "http://127.0.0.1:8000/api/contact/" + $scope.contact.id + "/"; 
+
+            $http.delete(url).then(()=>{
+                $scope.delete = true;
+                $timeout(function(){
+                    $scope.delete = false; 
+                }, 2000);
+                get();
+            }).catch((error)=>{
+                console.log(error);
+                $scope.failed = true;
+                $timeout(function(){
+                    $scope.failed = false; 
+                }, 2000);
+            });
         };
 
         // loading the contact list

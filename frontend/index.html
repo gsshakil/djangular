@@ -24,6 +24,14 @@
                 <strong>Failed!</strong> Failed to add contact.
             </div>
 
+            <div class="alert alert-success" ng-show="updated">
+                <strong>Success!</strong> Contact updated successfully!.
+            </div>
+
+            <div class="alert alert-success" ng-show="delete">
+                <strong>Success!</strong> Contact deleted successfully!.
+            </div>
+
             <div class="form-area">
                 <form role="form">
                     <br style="clear:both">
@@ -52,14 +60,15 @@
                     </tr>
 
                     <tr ng-repeat="contact in contacts">
-                        <td>{{$index+1}}</td>
-                        <td>{{contact.name}}
-                            <input type="text" value="{{contact.name}}" ng-show="updateMode">
+                        <td>{{contact.id}}</td>
+                        <td><span ng-hide="edit">{{contact.name}}</span>
+                            <input type="text"  ng-model="contact.name" ng-show="edit">
                         </td>
-                        <td>{{contact.phone}}
-                            <input type="text" value="{{contact.phone}}" ng-show="updateMode">
+                        <td><span ng-hide="edit">{{contact.phone}}</span>
+                            <input type="text"  ng-model="contact.phone" ng-show="edit">
                         </td>
-                        <td><button class="btn btn-default" ng-click="update()">Edit</button></td>
+                        <td><button class="btn btn-default" ng-show="edit" ng-click="edit=false; update()">update</button></td>
+                        <td><button class="btn btn-default" ng-hide="edit" ng-click="edit=true">Edit</button></td>
                         <td><button class="btn btn-danger" ng-click="remove()">X</button></td>
                     </tr>
                     
