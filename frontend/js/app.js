@@ -31,6 +31,8 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
                 //re-loading the contact list
                 get();
                 $scope.success = true;
+                $scope.successMsg = "A contact added successfully";
+
                 $timeout(function(){
                     $scope.success = false; 
                 }, 2000);
@@ -38,6 +40,7 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
             }).catch((error, status, header, config)=>{
 
                 $scope.failed = true;
+                $scope.failedMsg = error;
                 $timeout(function(){
                     $scope.failed = false; 
                 }, 2000);
@@ -58,13 +61,14 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
             
             $http.put(url, data).then(()=>{
                 $scope.updated = true;
+                $scope.successMsg = "Contact updated successfully";
                 $timeout(function(){
                     $scope.updated = false; 
                 }, 2000);
                 get();
             }).catch((error)=>{
                 console.log(error);
-                $scope.failed = true;
+                $scope.failedMsg = error;
                 $timeout(function(){
                     $scope.failed = false; 
                 }, 2000);
@@ -79,12 +83,13 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
             if (confirm("Are you sure?")){
                 $http.delete(url).then(()=>{
                     $scope.delete = true;
+                    $scope.successMsg = "Contact deleted successfully";
                     $timeout(function(){
                         $scope.delete = false; 
                     }, 2000);
                     get();
                 }).catch((error)=>{
-                    console.log(error);
+                    $scope.failedMsg = error;
                     $scope.failed = true;
                     $timeout(function(){
                         $scope.failed = false; 
