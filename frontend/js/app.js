@@ -30,6 +30,7 @@ app.controller("ContactCtrl", ["$scope", "$http", "$q", "$timeout",
 
                 //re-loading the contact list
                 get();
+                $scope.form = "";
                 $scope.success = true;
                 $scope.successMsg = "A contact added successfully";
 
